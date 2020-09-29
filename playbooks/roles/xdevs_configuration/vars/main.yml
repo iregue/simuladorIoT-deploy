@@ -1,7 +1,8 @@
 ---
 # vars file for xdevs_configuration
-template_path: /home/iregueiro/Documentos/universidad/ansible
-gpt_path: /home/iregueiro/Documentos/universidad/ansible/Gpt.java
+template_path: /home/iregueiro/simuladorIoT/src/xdevs/core/examples/efp
+gpt_path: /home/iregueiro/simuladorIoT/src/xdevs/core/examples/efp/Gpt.java
+fog_server_path: /home/iregueiro/simuladorIoT/src/xdevs/core/examples/efp/FogServer.java
 ficheros:
   - ap1
   - ap5
@@ -125,3 +126,7 @@ conectores:
   - out_type: fogServer
     out: fogserver1
     in: dataCenter
+deltext:
+  - nodoVirtual1
+  - nodoVirtual2
+  - nodoVirtual3

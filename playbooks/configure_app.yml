@@ -1,6 +1,7 @@
 ---
 - hosts: localhost
-  become: true
-  gather_facts: no
+  become: no
+  gather_facts: yes
   roles:
+    - download_application
     - xdevs_configuration

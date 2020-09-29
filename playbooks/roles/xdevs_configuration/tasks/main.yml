@@ -1,14 +1,5 @@
 ---
 # tasks file for xdevs_configuration
-- name: Copy java.main from template
-  become: true
-  copy:
-    src: "{{ template_path }}/Gpt-template.java"
-    dest: "{{ gpt_path }}"
-    owner: iregueiro
-    group: iregueiro
-    mode: '0666'
-
 - name: configure ficheros
   lineinfile:
     path: "{{ gpt_path }}"
@@ -83,18 +74,9 @@
   loop: "{{ conectores|reverse|list }}"
   when: item.out_type == "ficheros"
 
-- name: Copy java.main from template
-  become: true
-  copy:
-    src: "{{ template_path }}/FogServer-template.java"
-    dest: "{{ template_path }}/FogServer.java"
-    owner: iregueiro
-    group: iregueiro
-    mode: '0666'
-
 - name: configure fogserver.java Port initialize
   lineinfile:
-    path: "{{ gpt_path }}"
+    path: "{{ fog_server_path }}"
     insertafter: '^// ANSIBLE PORTINIT$'
     backup: no
     state: present
@@ -102,9 +84,9 @@
   loop: "{{ conectores|reverse|list }}"
   when: item.out_type == "nodoVirtual"
   
-- name: configure fogserver.java Port initialize
+- name: configure fogserver.java constructor
   lineinfile:
-    path: "{{ gpt_path }}"
+    path: "{{ fog_server_path }}"
     insertafter: '^// ANSIBLE CONSTRUCTOR$'
     backup: no
     state: present
@@ -112,4 +94,12 @@
   loop: "{{ conectores|reverse|list }}"
   when: item.out_type == "nodoVirtual"
 
+- name: configure fogserver.java deltext
+  lineinfile:
+    path: "{{ fog_server_path }}"
+    insertafter: '^// ANSIBLE DELTEXT$'
+    backup: no
+    state: present
+    line: currentInput = iIn{{ item|title }}.getSingleValue();
+  loop: "{{ deltext|reverse|list }}"
 ...

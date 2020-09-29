@@ -1,0 +1,18 @@
+---
+# tasks file for download_application
+- name: Create a directory if it does not exist
+  file:
+    path: /src
+    state: directory
+    mode: '0755'
+
+- name: Clone a application repository
+  git:
+    repo: https://github.com/iregue/simuladorIoT.git
+    dest: /home/iregueiro/simuladorIoT
+    version: feature/template
+  register: git_download
+
+- name: Debug git 
+  debug:
+    var: git_download
