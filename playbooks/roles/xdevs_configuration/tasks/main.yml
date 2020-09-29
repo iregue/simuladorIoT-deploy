@@ -3,16 +3,16 @@
 - name: Copy java.main from template
   become: true
   copy:
-    src: "{{ gpt_template_path }}"
+    src: "{{ template_path }}/Gpt-template.java"
     dest: "{{ gpt_path }}"
     owner: iregueiro
     group: iregueiro
-    mode: '0664'
+    mode: '0666'
 
 - name: configure ficheros
   lineinfile:
     path: "{{ gpt_path }}"
-    insertafter: '^# ANSIBLE FICHEROS$'
+    insertafter: '^// ANSIBLE FICHEROS$'
     backup: no
     state: present
     line: |
@@ -23,7 +23,7 @@
 - name: configure nodos virtuales
   lineinfile:
     path: "{{ gpt_path }}"
-    insertafter: '^# ANSIBLE NVIRTUAL$'
+    insertafter: '^// ANSIBLE NVIRTUAL$'
     backup: no
     state: present
     line: |
@@ -34,7 +34,7 @@
 - name: configure fog servers
   lineinfile:
     path: "{{ gpt_path }}"
-    insertafter: '^# ANSIBLE FOGSERVER$'
+    insertafter: '^// ANSIBLE FOGSERVER$'
     backup: no
     state: present
     line: |
@@ -45,7 +45,7 @@
 - name: configure data center
   lineinfile:
     path: "{{ gpt_path }}"
-    insertafter: '^# ANSIBLE DATACENTER$'
+    insertafter: '^// ANSIBLE DATACENTER$'
     backup: no
     state: present
     line: |
@@ -56,7 +56,7 @@
 - name: configure conectores fogServer
   lineinfile:
     path: "{{ gpt_path }}"
-    insertafter: '^# ANSIBLE CONECTOR$'
+    insertafter: '^// ANSIBLE CONECTOR$'
     backup: no
     state: present
     line: super.addCoupling({{ item.out }}.oOut, {{ item.in }}.iInDataCenter);
@@ -66,19 +66,50 @@
 - name: configure conectores NodoVirtual
   lineinfile:
     path: "{{ gpt_path }}"
-    insertafter: '^# ANSIBLE CONECTOR$'
+    insertafter: '^// ANSIBLE CONECTOR$'
     backup: no
     state: present
-    line: super.addCoupling({{ item.out }}.oOut, {{ item.in }}.iIn{{item.out|title }});
+    line: super.addCoupling({{ item.out }}.oOut, {{ item.in }}.iIn{{ item.out|title }});
   loop: "{{ conectores|reverse|list }}"
   when: item.out_type == "nodoVirtual"
 
 - name: configure conectores ficheros
   lineinfile:
     path: "{{ gpt_path }}"
-    insertafter: '^# ANSIBLE CONECTOR$'
+    insertafter: '^// ANSIBLE CONECTOR$'
     backup: no
     state: present
     line: super.addCoupling({{ item.out }}.oOut, {{ item.in }}.iInFichero);
   loop: "{{ conectores|reverse|list }}"
   when: item.out_type == "ficheros"
+
+- name: Copy java.main from template
+  become: true
+  copy:
+    src: "{{ template_path }}/FogServer-template.java"
+    dest: "{{ template_path }}/FogServer.java"
+    owner: iregueiro
+    group: iregueiro
+    mode: '0666'
+
+- name: configure fogserver.java Port initialize
+  lineinfile:
+    path: "{{ gpt_path }}"
+    insertafter: '^// ANSIBLE PORTINIT$'
+    backup: no
+    state: present
+    line: protected Port<Input> iIn{{ item.out|title }} = new Port<>("iIn{{ item.out|title }}");
+  loop: "{{ conectores|reverse|list }}"
+  when: item.out_type == "nodoVirtual"
+  
+- name: configure fogserver.java Port initialize
+  lineinfile:
+    path: "{{ gpt_path }}"
+    insertafter: '^// ANSIBLE CONSTRUCTOR$'
+    backup: no
+    state: present
+    line: super.addInPort(iIn{{ item.out|title }});
+  loop: "{{ conectores|reverse|list }}"
+  when: item.out_type == "nodoVirtual"
+
+...

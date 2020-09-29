@@ -1,6 +1,6 @@
 ---
 # vars file for xdevs_configuration
-gpt_template_path: /home/iregueiro/Documentos/universidad/ansible/Gpt-template.java
+template_path: /home/iregueiro/Documentos/universidad/ansible
 gpt_path: /home/iregueiro/Documentos/universidad/ansible/Gpt.java
 ficheros:
   - ap1

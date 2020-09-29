@@ -41,19 +41,19 @@ public class Gpt extends Coupled {
 		        .toAbsolutePath()
 		        .toString();
 		
-# ANSIBLE FICHEROS
+// ANSIBLE FICHEROS
         
         
-# ANSIBLE NVIRTUAL
+// ANSIBLE NVIRTUAL
     	
 
-# ANSIBLE FOGSERVER
+// ANSIBLE FOGSERVER
         
 
-# ANSIBLE DATACENTER
+// ANSIBLE DATACENTER
         
 
-# ANSIBLE CONECTOR
+// ANSIBLE CONECTOR
         
         
     }
