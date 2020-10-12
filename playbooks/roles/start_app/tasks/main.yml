@@ -1,0 +1,6 @@
+---
+- name: Create .jar
+  shell: mvn package
+
+- name: Run main class
+  shell: java -cp target/simuladorIoT-*.jar simuladorIoT.core.examples.efp.Gpt

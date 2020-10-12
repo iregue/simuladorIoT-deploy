@@ -3,5 +3,8 @@
   become: no
   gather_facts: yes
   roles:
+    #- configure_host
     - download_application
     - xdevs_configuration
+    - get_data
+    - start_app
