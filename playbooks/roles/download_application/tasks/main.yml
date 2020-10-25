@@ -1,5 +1,8 @@
 ---
-# tasks file for download_application
+- name: Delete previous app version
+  file:
+    state: absent
+    path: "{{ clone_dir }}"
 - name: Create a directory if it does not exist
   file:
     path: /src
@@ -9,7 +12,7 @@
 - name: Clone a application repository
   git:
     repo: https://github.com/iregue/simuladorIoT.git
-    dest: /home/iregueiro/simuladorIoT
+    dest: "{{ clone_dir }}"
     version: feature/template
   register: git_download
 

@@ -1,39 +1,12 @@
----
-# vars file for xdevs_configuration
-template_path: /home/iregueiro/simuladorIoT/src/xdevs/core/examples/efp
-gpt_path: /home/iregueiro/simuladorIoT/src/xdevs/core/examples/efp/Gpt.java
-fog_server_path: /home/iregueiro/simuladorIoT/src/xdevs/core/examples/efp/FogServer.java
+template_path: ~/simuladorIoT/src/xdevs/core/examples/efp
+gpt_path: ~/simuladorIoT/src/xdevs/core/examples/efp/Gpt.java
+fog_server_path: ~/simuladorIoT/src/xdevs/core/examples/efp/FogServer.java
 ficheros:
   - ap1
   - ap5
-  - ap6
-  - ap7
-  - dh1
-  - dh2
-  - dh3
-  - dh4
-  - dh5
-  - dh6
-  - dh7
-  - dh8
-  - dh9
-  - dh10
 nodo_virtual:
   - nodoVirtual1
   - nodoVirtual2
-  - nodoVirtual3
-  - nodoVirtual4
-  - nodoVirtual5
-  - nodoVirtual6
-  - nodoVirtual7
-  - nodoVirtual8
-  - nodoVirtual9
-  - nodoVirtual10
-  - nodoVirtual11
-  - nodoVirtual12
-  - nodoVirtual13
-  - nodoVirtual14
-  - nodoVirtual15
 fog_server:
   - fogserver1
 data_center:
@@ -45,83 +18,11 @@ conectores:
   - out_type: ficheros
     out: ap5
     in: nodoVirtual2
-  - out_type: ficheros
-    out: ap6
-    in: nodoVirtual3
-  - out_type: ficheros
-    out: ap7
-    in: nodoVirtual4
-  - out_type: ficheros
-    out: dh1
-    in: nodoVirtual5
-  - out_type: ficheros
-    out: dh2
-    in: nodoVirtual6
-  - out_type: ficheros
-    out: dh3
-    in: nodoVirtual7
-  - out_type: ficheros
-    out: dh4
-    in: nodoVirtual8
-  - out_type: ficheros
-    out: dh5
-    in: nodoVirtual9
-  - out_type: ficheros
-    out: dh6
-    in: nodoVirtual10
-  - out_type: ficheros
-    out: dh7
-    in: nodoVirtual11
-  - out_type: ficheros
-    out: dh8
-    in: nodoVirtual12
-  - out_type: ficheros
-    out: dh9
-    in: nodoVirtual13
-  - out_type: ficheros
-    out: dh10
-    in: nodoVirtual14
   - out_type: nodoVirtual
     out: nodoVirtual1
     in: fogserver1
   - out_type: nodoVirtual
     out: nodoVirtual2
-    in: fogserver1
-  - out_type: nodoVirtual
-    out: nodoVirtual3
-    in: fogserver1
-  - out_type: nodoVirtual
-    out: nodoVirtual4
-    in: fogserver1
-  - out_type: nodoVirtual
-    out: nodoVirtual5
-    in: fogserver1
-  - out_type: nodoVirtual
-    out: nodoVirtual6
-    in: fogserver1
-  - out_type: nodoVirtual
-    out: nodoVirtual7
-    in: fogserver1
-  - out_type: nodoVirtual
-    out: nodoVirtual8
-    in: fogserver1
-  - out_type: nodoVirtual
-    out: nodoVirtual9
-    in: fogserver1
-  - out_type: nodoVirtual
-    out: nodoVirtual10
-    in: fogserver1
-  - out_type: nodoVirtual
-    out: nodoVirtual11
-    in: fogserver1
-  - out_type: nodoVirtual
-    out: nodoVirtual12
-    in: fogserver1
-  - out_type: nodoVirtual
-    out: nodoVirtual13
-    in: fogserver1
-  - out_type: nodoVirtual
-    out: nodoVirtual14
     in: fogserver1
   - out_type: fogServer
     out: fogserver1
@@ -129,4 +30,3 @@ conectores:
 deltext:
   - nodoVirtual1
   - nodoVirtual2
-  - nodoVirtual3

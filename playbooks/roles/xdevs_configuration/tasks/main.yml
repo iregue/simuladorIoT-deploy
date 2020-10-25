@@ -80,7 +80,9 @@
     insertafter: '^// ANSIBLE PORTINIT$'
     backup: no
     state: present
-    line: protected Port<Input> iIn{{ item.out|title }} = new Port<>("iIn{{ item.out|title }}");
+    line: |
+            protected Port<Input> iIn{{ item.out|title }} = new Port<>("iIn{{ item.out|title }}");
+            protected Input currentInput{{ item.out|title }} = null;
   loop: "{{ conectores|reverse|list }}"
   when: item.out_type == "nodoVirtual"
   
@@ -100,6 +102,8 @@
     insertafter: '^// ANSIBLE DELTEXT$'
     backup: no
     state: present
-    line: currentInput = iIn{{ item|title }}.getSingleValue();
+    line: |
+            currentInput{{ item|title }} = iIn{{ item|title }}.getSingleValue();
+            processInput(currentInput{{ item|title }});
   loop: "{{ deltext|reverse|list }}"
 ...
