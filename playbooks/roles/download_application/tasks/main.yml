@@ -3,11 +3,6 @@
   file:
     state: absent
     path: "{{ clone_dir }}"
-- name: Create a directory if it does not exist
-  file:
-    path: /src
-    state: directory
-    mode: '0755'
 
 - name: Clone a application repository
   git:
@@ -19,3 +14,7 @@
 - name: Debug git 
   debug:
     var: git_download
+
+- name: Get data files
+  command: gsutil -m cp -r gs://simulador-iot-tfm-irt/{{ item }} {{ dest }}
+  loop: "{{ ficheros }}"

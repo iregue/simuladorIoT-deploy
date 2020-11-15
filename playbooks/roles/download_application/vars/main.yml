@@ -1,2 +1,6 @@
 ---
 clone_dir: ~/simuladorIoT
+dest: ~/simuladorIoT/data/
+ficheros:
+  - ap1
+  - ap5

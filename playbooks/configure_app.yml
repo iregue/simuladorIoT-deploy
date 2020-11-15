@@ -1,9 +1,13 @@
 ---
-- hosts: localhost
+- hosts: remote
   become: no
   gather_facts: yes
+  #environment:
+  #  JAVA_HOME: /usr/lib/jvm/java-11-openjdk-amd6
+  #  PATH: /usr/lib/jvm/java-11-openjdk-amd64:{{ ansible_env.PATH }}
+  
   roles:
-    #- configure_host
+    - configure_host
     - download_application
     - xdevs_configuration
-    #- start_app
+    - start_app

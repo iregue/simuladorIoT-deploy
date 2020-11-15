@@ -2,5 +2,26 @@
 - name: install maven (and other packages if needed)
   become: yes
   apt:
-    name: maven
+    name: "{{ item }}"
     state: present
+  loop:
+    - maven
+    - git
+    - python3-pip
+    - python3-setuptools
+    - openjdk-11-jre-headless
+
+- name: Install pip dependencies
+  pip:
+    name: "{{ item }}"
+    executable: pip3
+  loop:
+    - google-auth==1.23.0
+
+
+
+- name: Set JAVA_HOME path
+  shell: export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/"
+
+- name: Set PATH
+  shell: export PATH=$JAVA_HOME/bin:$PATH

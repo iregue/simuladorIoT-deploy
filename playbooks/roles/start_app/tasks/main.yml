@@ -1,6 +1,6 @@
 ---
 - name: Create .jar
-  shell: mvn package
+  command: chdir=/home/iregueiro/simuladorIoT mvn package
 
 - name: Run main class
-  shell: java -cp target/simuladorIoT-*.jar simuladorIoT.core.examples.efp.Gpt
+  shell: chdir=/home/iregueiro/simuladorIoT java -cp target/xdevs-*.jar xdevs.core.examples.efp.Gpt
