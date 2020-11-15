@@ -7,10 +7,10 @@ resource "google_compute_instance" "simulator" {
 
   boot_disk {
     auto_delete = true
-    
+
     initialize_params {
       image = "debian-cloud/debian-9"
-      size = 50
+      size  = 50
     }
   }
 
