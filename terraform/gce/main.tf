@@ -21,11 +21,5 @@ resource "google_compute_instance" "simulator" {
       // Ephemeral IP
     }
   }
-
-  metadata = {
-    foo = "bar"
-  }
-
-  metadata_startup_script = "echo hi > /test.txt"
 }
 
