@@ -43,7 +43,6 @@ public class Gpt extends Coupled {
 		
 // ANSIBLE FICHEROS
         
-        
 // ANSIBLE NVIRTUAL
     	
 

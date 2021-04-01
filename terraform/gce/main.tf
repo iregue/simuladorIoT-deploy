@@ -3,7 +3,7 @@ resource "google_compute_instance" "simulator" {
   machine_type = "e2-medium"
   zone         = "europe-west4-a"
 
-  tags = ["project", "tmf"]
+  tags = ["project", "tmf-irt"]
 
   boot_disk {
     auto_delete = true
@@ -21,11 +21,5 @@ resource "google_compute_instance" "simulator" {
       // Ephemeral IP
     }
   }
-
-  metadata = {
-    foo = "bar"
-  }
-
-  metadata_startup_script = "echo hi > /test.txt"
 }
 
