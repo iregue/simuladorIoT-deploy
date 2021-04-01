@@ -15,6 +15,6 @@
   debug:
     var: git_download
 
-- name: Get data files
-  command: gsutil -m cp -r gs://simulador-iot-tfm-irt/{{ item }} {{ dest }}
-  loop: "{{ ficheros }}"
+#- name: Get data files
+#  command: gsutil -m cp -r gs://simulador-iot-tfm-irt/{{ item }} {{ dest }}
+#  loop: "{{ ficheros }}"

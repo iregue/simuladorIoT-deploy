@@ -29,8 +29,8 @@
     backup: no
     state: present
     line: |
-            FogServer {{ item }} = new FogServer("{{ item }}", period);
-            super.addComponent({{ item }});
+            FogServer {{ item.name }} = new FogServer("{{ item.name }}", period, {{ item.krigingX }}, {{ item.krigingY }}, Arrays.asList({{ item.coordenadasNodosX }}), Arrays.asList({{ item.coordenadasNodosY }}) );
+            super.addComponent({{ item.name }});
   loop: "{{ fog_server|reverse|list }}"
 
 - name: configure data center
@@ -85,7 +85,16 @@
             protected Input currentInput{{ item.out|title }} = null;
   loop: "{{ conectores|reverse|list }}"
   when: item.out_type == "nodoVirtual"
-  
+
+- name: configure fogserver.java kriging initialize
+  lineinfile:
+    path: "{{ fog_server_path }}"
+    insertafter: '^// ANSIBLE PORTINIT$'
+    backup: no
+    state: present
+    line: double krigingiIn{{ item|title }} = 0.0;
+  loop: "{{ nodo_virtual|reverse|list }}"
+
 - name: configure fogserver.java constructor
   lineinfile:
     path: "{{ fog_server_path }}"
@@ -105,5 +114,25 @@
     line: |
             currentInput{{ item|title }} = iIn{{ item|title }}.getSingleValue();
             processInput(currentInput{{ item|title }});
-  loop: "{{ deltext|reverse|list }}"
+            
+            if(currentInput{{ item|title }} != null) {
+              processInput(currentInput{{ item|title }});
+              krigingiIn{{ item|title }} += currentInput{{ item|title }}.getRadiacion();
+              krigingDate = currentInput{{ item|title }}.getDate();
+            }
+  loop: "{{ nodo_virtual|reverse|list }}"
+
+- name: configure fogserver.java deltext
+  lineinfile:
+    path: "{{ fog_server_path }}"
+    insertafter: '^// ANSIBLE KRIGING_ADD_VALUES$'
+    backup: no
+    state: present
+    line: |
+            if(krigingiIn{{ item|title }} != 0.0){
+              valores.add(krigingiIn{{ item|title }}/100);
+            }
+  loop: "{{ nodo_virtual|reverse|list }}"
+
+
 ...

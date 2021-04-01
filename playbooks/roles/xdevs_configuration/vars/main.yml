@@ -8,7 +8,11 @@ nodo_virtual:
   - nodoVirtual1
   - nodoVirtual2
 fog_server:
-  - fogserver1
+  - name: fogserver1
+    krigingX: 70.0
+    krigingY: 75.0
+    coordenadasNodosX: 1.0, 2.0, 3.0
+    coordenadasNodosY: 4.0, 3.0, 5.0
 data_center:
   - dataCenter
 conectores:
