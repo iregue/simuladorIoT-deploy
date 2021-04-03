@@ -50,7 +50,7 @@
     insertafter: '^// ANSIBLE CONECTOR$'
     backup: no
     state: present
-    line: super.addCoupling({{ item.out }}.oOut, {{ item.in }}.iInDataCenter);
+    line: super.addCoupling({{ item.out }}.oOut, {{ item.in }}.iIn{{item.out|title }});
   loop: "{{ conectores|reverse|list }}"
   when: item.out_type == "fogServer"
 
@@ -134,5 +134,42 @@
             }
   loop: "{{ nodo_virtual|reverse|list }}"
 
+- name: configure dataCenter.java Port initialize
+  lineinfile:
+    path: "{{ data_center_path }}"
+    insertafter: '^// ANSIBLE PORTINIT$'
+    backup: no
+    state: present
+    line: |
+            protected Port<Input> iIn{{ item.name|title }} = new Port<>("iIn{{ item.name|title }}");
+            protected Input currentInput{{ item.name|title }} = null;
+  loop: "{{ fog_server|reverse|list }}"
+
+- name: configure dataCenter.java constructor
+  lineinfile:
+    path: "{{ data_center_path }}"
+    insertafter: '^// ANSIBLE CONSTRUCTOR$'
+    backup: no
+    state: present
+    line: super.addInPort(iIn{{ item.name|title }});
+  loop: "{{ fog_server|reverse|list }}"
+
+- name: configure dataCenter.java deltext
+  lineinfile:
+    path: "{{ data_center_path }}"
+    insertafter: '^// ANSIBLE DELTEXT$'
+    backup: no
+    state: present
+    line: |
+            Collection<Input> collection{{ item.name|title }} = iIn{{ item.name|title }}.getValues();
+            
+            if(collection{{ item.name|title }} != null) {
+              try {
+              	storeCollection(collection{{ item.name|title }});
+              } catch (IOException e1) {
+              	e1.printStackTrace();
+              }
+            }
+  loop: "{{ fog_server|reverse|list }}"
 
 ...

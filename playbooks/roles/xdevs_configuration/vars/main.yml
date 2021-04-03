@@ -1,6 +1,7 @@
 template_path: ~/simuladorIoT/src/xdevs/core/examples/efp
 gpt_path: ~/simuladorIoT/src/xdevs/core/examples/efp/Gpt.java
 fog_server_path: ~/simuladorIoT/src/xdevs/core/examples/efp/FogServer.java
+data_center_path: ~/simuladorIoT/src/xdevs/core/examples/efp/DataCenter.java
 ficheros:
   - ap1
   - ap5
