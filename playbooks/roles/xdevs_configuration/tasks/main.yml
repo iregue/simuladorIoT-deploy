@@ -7,7 +7,7 @@
     backup: no
     state: present
     line: |
-            Ficheros {{ item }} = new Ficheros("{{ item }}", period, userDirectory + "/data/pruebas/");
+            Ficheros {{ item }} = new Ficheros("{{ item }}", period, userDirectory + "/data/{{ item }}/");
             super.addComponent({{ item }});
   loop: "{{ ficheros|reverse|list }}"
 
