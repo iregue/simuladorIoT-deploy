@@ -112,9 +112,7 @@
     backup: no
     state: present
     line: |
-            currentInput{{ item|title }} = iIn{{ item|title }}.getSingleValue();
-            processInput(currentInput{{ item|title }});
-            
+            currentInput{{ item|title }} = iIn{{ item|title }}.getSingleValue(); 
             if(currentInput{{ item|title }} != null) {
               processInput(currentInput{{ item|title }});
               krigingiIn{{ item|title }} += currentInput{{ item|title }}.getRadiacion();
