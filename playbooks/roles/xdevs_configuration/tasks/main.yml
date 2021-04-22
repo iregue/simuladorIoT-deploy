@@ -7,8 +7,8 @@
     backup: no
     state: present
     line: |
-            Ficheros {{ item }} = new Ficheros("{{ item }}", period, userDirectory + "/data/{{ item }}/, 0, 0");
-            super.addComponent({{ item }});
+            Ficheros {{ item.name }} = new Ficheros("{{ item.name }}", period, userDirectory + "/data/{{ item.name }}/", {{ item.startDate }}, {{ item.endDate }});
+            super.addComponent({{ item.name }});
   loop: "{{ ficheros|reverse|list }}"
 
 - name: configure nodos virtuales
@@ -112,11 +112,13 @@
     backup: no
     state: present
     line: |
-            currentInput{{ item|title }} = iIn{{ item|title }}.getSingleValue(); 
-            if(currentInput{{ item|title }} != null) {
-              processInput(currentInput{{ item|title }});
-              krigingiIn{{ item|title }} += currentInput{{ item|title }}.getRadiacion();
-              krigingDate = currentInput{{ item|title }}.getDate();
+            if(iIn{{ item|title }}.isEmpty() == false) {
+              currentInput{{ item|title }} = iIn{{ item|title }}.getSingleValue(); 
+              if(currentInput{{ item|title }} != null) {
+                processInput(currentInput{{ item|title }});
+                krigingiIn{{ item|title }} += currentInput{{ item|title }}.getRadiacion();
+                krigingDate = currentInput{{ item|title }}.getDate();
+              }
             }
   loop: "{{ nodo_virtual|reverse|list }}"
 

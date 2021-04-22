@@ -10,4 +10,4 @@
           #- configure_host
     - download_application
     - xdevs_configuration
-    - start_app
+      #- start_app

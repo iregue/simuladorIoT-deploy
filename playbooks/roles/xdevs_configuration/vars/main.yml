@@ -3,17 +3,50 @@ gpt_path: ~/simuladorIoT/src/xdevs/core/examples/efp/Gpt.java
 fog_server_path: ~/simuladorIoT/src/xdevs/core/examples/efp/FogServer.java
 data_center_path: ~/simuladorIoT/src/xdevs/core/examples/efp/DataCenter.java
 ficheros:
-  - ap1
-  - ap5
+  - name: ap1
+    startDate: "null"
+    endDate: "null"
+  - name: ap5
+    startDate: "null"
+    endDate: "null"
+  - name: ap6
+    startDate: "null"
+    endDate: "null"
+  - name: ap7
+    startDate: "null"
+    endDate: "null"
+  - name: dh1
+    startDate: "null"
+    endDate: "null"
+  - name: dh2
+    startDate: "null"
+    endDate: "null"
+  - name: dh3
+    startDate: "null"
+    endDate: "null"
+  - name: dh4
+    startDate: "null"
+    endDate: "null"
 nodo_virtual:
   - nodoVirtual1
   - nodoVirtual2
+  - nodoVirtual3
+  - nodoVirtual4
+  - nodoVirtual5
+  - nodoVirtual6
+  - nodoVirtual7
+  - nodoVirtual8
 fog_server:
   - name: fogserver1
-    krigingX: 70.0
-    krigingY: 75.0
-    coordenadasNodosX: 1.0, 2.0, 3.0
-    coordenadasNodosY: 4.0, 3.0, 5.0
+    krigingX: 10.0
+    krigingY: 80.0
+    coordenadasNodosX: 12.771, 9.692, 8.165, 14.779
+    coordenadasNodosY: 83.829, 82.415, 79.381, 77.897
+  - name: fogserver2
+    krigingX: 14.0
+    krigingY: 85.0
+    coordenadasNodosX: 15.409, 14.244, 12.264, 12.957
+    coordenadasNodosY: 86.845, 84.642, 84.802, 85.018
 data_center:
   - dataCenter
 conectores:
@@ -23,15 +56,60 @@ conectores:
   - out_type: ficheros
     out: ap5
     in: nodoVirtual2
+  - out_type: ficheros
+    out: ap6
+    in: nodoVirtual3
+  - out_type: ficheros
+    out: ap7
+    in: nodoVirtual4
+  - out_type: ficheros
+    out: dh1
+    in: nodoVirtual5
+  - out_type: ficheros
+    out: dh2
+    in: nodoVirtual6
+  - out_type: ficheros
+    out: dh3
+    in: nodoVirtual7
+  - out_type: ficheros
+    out: dh4
+    in: nodoVirtual8
   - out_type: nodoVirtual
     out: nodoVirtual1
     in: fogserver1
   - out_type: nodoVirtual
     out: nodoVirtual2
     in: fogserver1
+  - out_type: nodoVirtual
+    out: nodoVirtual3
+    in: fogserver1
+  - out_type: nodoVirtual
+    out: nodoVirtual4
+    in: fogserver1
+  - out_type: nodoVirtual
+    out: nodoVirtual5
+    in: fogserver2
+  - out_type: nodoVirtual
+    out: nodoVirtual6
+    in: fogserver2
+  - out_type: nodoVirtual
+    out: nodoVirtual7
+    in: fogserver2
+  - out_type: nodoVirtual
+    out: nodoVirtual8
+    in: fogserver2
   - out_type: fogServer
     out: fogserver1
+    in: dataCenter
+  - out_type: fogServer
+    out: fogserver2
     in: dataCenter
 deltext:
   - nodoVirtual1
   - nodoVirtual2
+  - nodoVirtual3
+  - nodoVirtual4
+  - nodoVirtual5
+  - nodoVirtual6
+  - nodoVirtual7
+  - nodoVirtual8
